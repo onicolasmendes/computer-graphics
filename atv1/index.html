@@ -1,0 +1,112 @@
+<!-- Nicolas Expedito Lana Mendes - 22.1.4028 -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 1 - WebGL</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="glCanvas"></canvas>
+    <script>
+        // Obtém o elemento canvas do HTML
+        const canvas = document.getElementById("glCanvas");
+        // Inicializa o contexto WebGL
+        const gl = canvas.getContext("webgl");
+
+        // Verifica se o WebGL está disponível
+        if (!gl) {
+            alert("WebGL não é suportado pelo seu navegador.");
+        }
+
+        // Ajusta o tamanho do canvas para ocupar a tela inteira
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+
+        // Código do Vertex Shader
+        const vertexShaderSource = `
+            attribute vec2 a_position;
+            void main() {
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }
+        `;
+
+        // Código do Fragment Shader
+        const fragmentShaderSource = `
+            precision mediump float;
+            void main() {
+                gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); // Cor azul
+            }
+        `;
+
+        // Função para criar e compilar shaders
+        function createShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error("Erro na compilação do shader:", gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+
+        // Cria os shaders
+        const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+        const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+        // Cria o programa WebGL e vincula os shaders
+        const program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.error("Erro ao vincular programa:", gl.getProgramInfoLog(program));
+        }
+
+        gl.useProgram(program);
+
+        // Define os vértices do quadrado central 
+        const vertices = new Float32Array([
+            -0.5,  0.5,  
+            -0.5, -0.5,  
+             0.5,  0.5, 
+             0.5,  0.5,  
+            -0.5, -0.5,  
+             0.5, -0.5   
+        ]);
+
+        // Cria um buffer para os vértices
+        const vertexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+        // Vincula os atributos do shader aos dados do buffer
+        const positionLocation = gl.getAttribLocation(program, "a_position");
+        gl.enableVertexAttribArray(positionLocation);
+        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+        // Limpa a tela com uma cor de fundo preta
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        // Desenha o quadrado 
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+    </script>
+</body>
+</html>

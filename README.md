@@ -1,1 +1,3 @@
-# computer-graphics
+# Computação Gráfica - UFOP
+
+Este repositório contém implementações e relatórios das atividades desenvolvidas na disciplina de Computação Gráfica do curso de Bacharelado em Ciência da Computação da Universidade Federal de Ouro Preto (UFOP). As atividades envolvem a aplicação de conceitos fundamentais de computação gráfica, incluindo transformações geométricas, projeção 3D, renderização e animação. Além disso, os relatórios apresentam análises técnicas e descrição dos métodos utilizados nas implementações. O objetivo deste repositório é documentar o aprendizado na disciplina e fornecer uma base para estudos futuros na área.
