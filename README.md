@@ -1,3 +1,7 @@
-# Computação Gráfica - UFOP
+# Computação Gráfica - UFOP / Computer Graphics - UFOP
 
+## Português
 Este repositório contém implementações e relatórios das atividades desenvolvidas na disciplina de Computação Gráfica do curso de Bacharelado em Ciência da Computação da Universidade Federal de Ouro Preto (UFOP). As atividades envolvem a aplicação de conceitos fundamentais de computação gráfica, incluindo transformações geométricas, projeção 3D, renderização e animação. Além disso, os relatórios apresentam análises técnicas e descrição dos métodos utilizados nas implementações. O objetivo deste repositório é documentar o aprendizado na disciplina e fornecer uma base para estudos futuros na área.
+
+## English
+This repository contains implementations and reports of activities developed in the Computer Graphics course of the Bachelor's Degree in Computer Science at the Federal University of Ouro Preto (UFOP). The activities involve applying fundamental computer graphics concepts, including geometric transformations, 3D projection, rendering, and animation. Additionally, the reports provide technical analyses and descriptions of the methods used in the implementations. The goal of this repository is to document learning in the course and provide a foundation for future studies in the area.
